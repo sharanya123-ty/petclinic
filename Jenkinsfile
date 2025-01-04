@@ -12,57 +12,84 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                checkoutCode()
+                script {
+                pipeline.checkoutscm()
+                }
             }
         }
 
         stage('Set up Java 17') {
             steps {
-                setupJava()
+                script {
+                pipeline.setupjava()
+                }
             }
         }
 
         stage('Set up Maven') {
             steps {
-                setupMaven()
+                script {
+                pipeline.mavensetup()
+				}
             }
         }
 
         stage('Build with Maven') {
             steps {
-                buildProject()
+                script {
+                pipeline.build()
+				}
             }
         }
 
         stage('Upload Artifact') {
             steps {
-                echo 'Uploading artifact...'
-                archiveArtifacts artifacts: 'target/petclinic-0.0.1-SNAPSHOT.jar', allowEmptyArchive: true
+                uploadArtifact('target/bus-booking-app-1.0-SNAPSHOT.jar')
             }
         }
 
         stage('Run Application') {
             steps {
-                runApplication()
+                script {
+                pipeline.runApp()
+				}
             }
         }
 
         stage('Validate App is Running') {
             steps {
-                validateApp()
+                script {
+                pipeline.validateApp()
+				}
             }
         }
-
-        stage('Gracefully Stop Spring Boot App') {
-            steps {
-                stopApplication()
-            }
+        stage('wait') {
+			steps {
+				script {
+					pipeline.wait()
+				}
+			}
         }
-    }
-
-    post {
-        always {
-            cleanup()
+        stage('stoping') {
+			steps {
+				script {
+					pipeline.stop()
+				}
+			}
         }
+         stage('cleaning') {
+			steps {
+				script {
+					pipeline.clean()
+				}
+			}
+        }        
+		stage('sending a mail') {
+			steps {
+				script {
+				pipeline.mail()
+			}
+			}
     }
+  }
 }
