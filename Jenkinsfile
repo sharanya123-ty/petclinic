@@ -12,9 +12,7 @@ pipeline {
    stages {
         stage('Checkout Code') {
             steps {
-                script {
-                pipeline.checkoutscm()
-                }
+                checkout scm
             }
         }
 
