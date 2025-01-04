@@ -12,14 +12,14 @@ pipeline {
    stages {
         stage('Checkout Code') {
             steps {
-                checkout scm
+                pipeline1.checkoutscm()
             }
         }
 
         stage('Set up Java 17') {
             steps {
                 script {
-                pipeline.setupjava()
+                pipeline1.setupjava()
                 }
             }
         }
@@ -27,7 +27,7 @@ pipeline {
         stage('Set up Maven') {
             steps {
                 script {
-                pipeline.mavensetup()
+                pipeline1.mavensetup()
 				}
             }
         }
@@ -35,7 +35,7 @@ pipeline {
         stage('Build with Maven') {
             steps {
                 script {
-                pipeline.build()
+                pipeline1.build()
 				}
             }
         }
@@ -49,7 +49,7 @@ pipeline {
         stage('Run Application') {
             steps {
                 script {
-                pipeline.runApp()
+                pipeline1.runApp()
 				}
             }
         }
@@ -57,35 +57,35 @@ pipeline {
         stage('Validate App is Running') {
             steps {
                 script {
-                pipeline.validateApp()
+                pipeline1.validateApp()
 				}
             }
         }
         stage('wait') {
 			steps {
 				script {
-					pipeline.wait()
+					pipeline1.waiting()
 				}
 			}
         }
         stage('stoping') {
 			steps {
 				script {
-					pipeline.stop()
+					pipeline1.stoping()
 				}
 			}
         }
          stage('cleaning') {
 			steps {
 				script {
-					pipeline.clean()
+					pipeline1.cleaning()
 				}
 			}
         }        
 		stage('sending a mail') {
 			steps {
 				script {
-				pipeline.mail()
+				pipeline1.notify()
 			}
 			}
         }
