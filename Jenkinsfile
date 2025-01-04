@@ -1,5 +1,5 @@
 pipeline {
-   agent { label 'slave' }
+    agent { label 'slave-1' }
 
     environment {
         JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
@@ -40,7 +40,7 @@ pipeline {
         stage('Upload Artifact') {
             steps {
                 echo 'Uploading artifact...'
-                archiveArtifacts artifacts: 'target/bus-booking-app-1.0-SNAPSHOT.jar', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'target/petclinic-1.0-SNAPSHOT.jar', allowEmptyArchive: true
             }
         }
 
@@ -53,7 +53,6 @@ pipeline {
                 // Fetch the public IP and display the access URL
                 script {
                     def publicIp = sh(script: "curl -s https://checkip.amazonaws.com", returnStdout: true).trim()
-                    
                     echo "The application is running and accessible at: http://${publicIp}:8080"
                 }
             }
@@ -75,10 +74,10 @@ pipeline {
             }
         }
 
-        stage('Wait for 5 minutes') {
+        stage('Wait for 5 seconds') {
             steps {
-                echo 'Waiting for 5 minutes...'
-                sleep(time: 5, unit: 'MINUTES')  // Wait for 5 minutes
+                echo 'Waiting for 5 seconds...'
+                sleep(time: 5, unit: 'SECONDS')  // Wait for 5 seconds
             }
         }
 
