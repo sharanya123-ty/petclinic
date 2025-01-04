@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'slave1' }
+    agent { label 'slave-1' }
 
     environment {
         JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
@@ -40,7 +40,7 @@ pipeline {
         stage('Upload Artifact') {
             steps {
                 echo 'Uploading artifact...'
-                archiveArtifacts artifacts: 'target/petclinic-app-0.0.1-SNAPSHOT.jar', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'target/petclinic-1.0-SNAPSHOT.jar', allowEmptyArchive: true
             }
         }
 
@@ -74,10 +74,10 @@ pipeline {
             }
         }
 
-        stage('Wait for 5 minutes') {
+        stage('Wait for 5 seconds') {
             steps {
-                echo 'Waiting for 3 minutes...'
-                sleep(time: 2, unit: 'MINUTES')  // Wait for 2 minutes
+                echo 'Waiting for 5 seconds...'
+                sleep(time: 5, unit: 'SECONDS')  // Wait for 5 seconds
             }
         }
 
