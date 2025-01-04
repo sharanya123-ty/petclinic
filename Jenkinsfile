@@ -9,11 +9,11 @@ pipeline {
         PATH = "${JAVA_HOME}/bin:${MAVEN_HOME}/bin:${env.PATH}"
     }
 
-    stages {
+   stages {
         stage('Checkout Code') {
             steps {
                 script {
-                checkoutscm()
+                pipeline.checkoutscm()
                 }
             }
         }
@@ -21,7 +21,7 @@ pipeline {
         stage('Set up Java 17') {
             steps {
                 script {
-                setupjava()
+                pipeline.setupjava()
                 }
             }
         }
@@ -29,7 +29,7 @@ pipeline {
         stage('Set up Maven') {
             steps {
                 script {
-                mavensetup()
+                pipeline.mavensetup()
 				}
             }
         }
@@ -37,7 +37,7 @@ pipeline {
         stage('Build with Maven') {
             steps {
                 script {
-                build()
+                pipeline.build()
 				}
             }
         }
@@ -51,7 +51,7 @@ pipeline {
         stage('Run Application') {
             steps {
                 script {
-                runApp()
+                pipeline.runApp()
 				}
             }
         }
@@ -59,37 +59,37 @@ pipeline {
         stage('Validate App is Running') {
             steps {
                 script {
-                validateApp()
+                pipeline.validateApp()
 				}
             }
         }
         stage('wait') {
 			steps {
 				script {
-					wait()
+					pipeline.wait()
 				}
 			}
         }
         stage('stoping') {
 			steps {
 				script {
-					stop()
+					pipeline.stop()
 				}
 			}
         }
          stage('cleaning') {
 			steps {
 				script {
-					clean()
+					pipeline.clean()
 				}
 			}
         }        
 		stage('sending a mail') {
 			steps {
 				script {
-				mail()
+				pipeline.mail()
 			}
 			}
+        }
     }
-  }
 }
