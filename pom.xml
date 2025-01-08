@@ -10,13 +10,7 @@
     <name>PetClinic</name>
     <description>Pet Clinic Application</description>
     <packaging>jar</packaging>
-<distributionManagement>
-    <repository>
-        <id>central</id>
-        <name>a0evupug5vrsy-artifactory-primary-0-releases</name>
-        <url>https://trialolt42z.jfrog.io/artifactory/pet-clinic-libs-release</url>
-    </repository>
-</distributionManagement>
+
     <distributionManagement>
     <repository>
         <id>central</id>
